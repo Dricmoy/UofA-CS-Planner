@@ -1,7 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
-import time
 import re
+import csv
+
 
 # Function to fetch the HTML content of a URL
 def get_html(url):
@@ -24,7 +25,7 @@ def get_class_code(faculty_code):
 
         return [i.split(' -')[0].replace(' ', '_') for i in lst]
 
-def get_class_desc(cls):
+def get_class_info(cls):
     url = f'https://apps.ualberta.ca/catalogue/course/{cls}'
     html = get_html(url)
     soup = BeautifulSoup(html, 'html.parser')
@@ -43,10 +44,8 @@ def get_class_desc(cls):
         lst[0] = (lst[0].split(" -"))[0]
 
         
-        prereq = re.findall(r'Pre-?requisites?:\s*([A-Za-z0-9\s(),-]+)', lst[-1], flags = re.IGNORECASE) 
-        coreq = re.findall(r'Co-?requisites?:\s*([A-Za-z0-9\s(),-]+)', lst[-1], flags = re.IGNORECASE)
-        #restrictions = re.findall(r'Credit \s*([A-Za-z0-9\s()]+)', lst[-1])
-        #print(restrictions)
+        prereq = re.findall(r'Pre-?requisites?:\s*([A-Za-z0-9\s,:()-]+)', lst[-1], flags = re.IGNORECASE) 
+        coreq = re.findall(r' Co-?requisites?:\s*([A-Za-z0-9\s,:()-]+)', lst[-1], flags = re.IGNORECASE)
         prereq = standarize_req(prereq)
         coreq = standarize_req(coreq)
 
@@ -71,16 +70,23 @@ def standarize_req(req):
             r" or consent of the Department",
             r" or consent of Department",
             r" and consent of the Department",
+            r"Consent of Department",
             r"consent of the instructor",
             r" or consent of the instructor",
+            r", or instructor consent",
             r", or with instructor",
-            r" or consent of Instructor"
+            r" or consent of Instructor",
+            r" and consent of instructor",
+            r" or consent of instructor",
+            r"Consent of Instructor",
+            r"Consent of instructor",
+            r"consent of Instructor",
+            r"consent of instructor"
         ]
 
         combined_pattern = re.compile("|".join(map(re.escape, patterns_to_remove)))
         req = combined_pattern.sub("", req[0]).upper()
-        print(req)
-        
+        #print(req)
         if "ONE OF" in req:
             lst = re.split(r';|AND', req)
         else:
@@ -94,11 +100,11 @@ def standarize_req(req):
 
             temp_lst = []
 
-
             if "ONE OF" in elements:
-                elements = (elements.split("ONE OF ")) [1]
+                print(elements, req)
+                elements = (elements.split("ONE OF")) [1]
                 matches = re.findall(r'((?:(?!OR)\b[A-Za-z]+\b)(?:\s+[A-Za-z]+)?)?\s+(\d+)', elements)
-
+                
                 faculty_name = ''
                 for match in matches:
                     match = list(match)
@@ -119,28 +125,34 @@ def standarize_req(req):
                 faculty_name = ''
                 temp_lst = []
                 for element in elements:
-                    element = element.lstrip().rstrip()
-                    
-                    if len(element) > 4:
-                        faculty_name = element[:-4]
+                    if element and element != ' ':
+                        element = element.lstrip().rstrip()
+                        
+                        if len(element) > 4:
+                            faculty_name = element[:-4]
 
-                    else:
-                        element = faculty_name + " " + element[-3:]
-                    element = element.lstrip().rstrip()
-                    temp_lst.append(element)
+                        else:
+                            element = faculty_name + " " + element[-3:]
+                        element = element.lstrip().rstrip()
+                                        
+
+                        temp_lst.append(element)
+
                 standardized_lst.append(temp_lst)
 
                 
-            else:
+            else: 
                 elements = elements.lstrip().rstrip()
-                if len(elements) > 4:
-                    faculty_name = elements[:-4]
-                else:
-                    elements = faculty_name + " " + elements[-3:]
-                standardized_lst.append(elements)
-            
+                if elements and elements != ' ':
+                    if len(elements) > 4:
+                        faculty_name = elements[:-4]
+                    else:
+                        elements = faculty_name + " " + elements[-3:]
+                
 
-        return standardized_lst
+                    standardized_lst.append(elements)
+
+        return standardized_lst if standardized_lst else None
 
     else:
         return None 
@@ -178,20 +190,23 @@ def main():
     faculty_codes = ['ah', 'ar', 'au', 'bc', 'ed', 'en', 'et', 'ex', 'la', 'mh', 'ns', 'nu', 
     'pe', 'ph', 'ps', 'rm', 'sa', 'sc', 'ss']
 
-    with open("test.txt", "w") as file:
-        file.write(str(get_class_desc('cmput')))
 
-    """
+    
     class_lst = []
     for code in faculty_codes:
         class_lst = class_lst + get_class_code(code)
         
-    class_desc = {}
 
-    for class_ in class_lst:
-        class_desc[class_] = get_class_desc(class_.upper())
+
+    with open("data.csv", 'a', newline='') as csvfile:
+        csv_writer = csv.writer(csvfile)
+        csv_writer.writerow(['class_name', 'class_desc', 'prereq', 'coreq'])
+        for class_ in class_lst:
+            for cl in get_class_info(class_):
+            # Write data
+                csv_writer.writerow(cl)
+            
     
-    """
             
 if __name__ == "__main__":
     main()
