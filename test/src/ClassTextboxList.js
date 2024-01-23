@@ -1,23 +1,44 @@
 import React, { useState } from 'react';
 import ClassTextbox from './ClassTextbox';
 const ClassTextboxList = () => {
-    const [textboxes, setTextbox] = useState([]); // Initial values, you can set them as needed
-    
+    const [textboxes, setTextboxes] = useState([]); // Initial values, you can set them as needed
+    const [value, setValue] = useState('');
 
+    const onChange = (e) => {
+        setTextboxes((prev) => {
+            let helper = [...prev];
+            helper[e.target.name] = e.target.value;
+            console.log(e.target.name)
+            console.log(e.target.value)
+            return helper;
+        });
+    }
+    
     const addTextbox = () => {
-        setTextbox(prevTextboxes => [...prevTextboxes, <input type="text" key={prevTextboxes.length} />]);
+        setTextboxes(prevTextboxes => [...prevTextboxes,
+        <input
+            name={prevTextboxes.length}
+            type="text"
+            value={value}
+            onChange={(e)=>{onChange(e)}}
+            placeholder = "Insert class here"
+        />
+        ]);
     };
 
-    const removeTextBox = (index) =>{
+    const removeTextBox = () =>{
         const newValues = [...textboxes];
-        newValues[index].pop();
-        setTextbox(newValues);
+        newValues.pop();
+        setTextboxes(newValues);
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column'}}>
-            <button onClick={addTextbox}>Add Textbox</button>
-            {textboxes.map(textboxes => textboxes)}
+        <div>
+            <div style={{ display: 'flex', flexDirection: 'column'}}>
+                <button onClick={addTextbox}>Add Textbox</button>
+                {textboxes.map(textboxes => textboxes)}
+            </div>
+
       </div>
     );
 }
