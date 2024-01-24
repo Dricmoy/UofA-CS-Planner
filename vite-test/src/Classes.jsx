@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ClassTextboxList from './ClassTextboxList';
 const Classes = () => {
     const [classes, setClasses] = useState([]);
     const addSemester = () => {

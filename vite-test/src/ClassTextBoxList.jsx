@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ClassTextbox from './ClassTextbox';
 const ClassTextboxList = () => {
     const [textboxes, setTextboxes] = useState([]); // Initial values, you can set them as needed
     const [value, setValue] = useState('');
@@ -8,8 +7,6 @@ const ClassTextboxList = () => {
         setTextboxes((prev) => {
             let helper = [...prev];
             helper[e.target.name] = e.target.value;
-            console.log(e.target.name)
-            console.log(e.target.value)
             return helper;
         });
     }
