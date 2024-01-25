@@ -19,10 +19,12 @@
 
 ## Introduction
 
-This project aims to provide a full-stack solution for creating and managing a course planner. The frontend is built with React and Vite, styled using Tailwind CSS. The backend, powered by Express, loads data into a cloud server and exposes an API endpoint for class information. 
+We wanted to design a course planner for students eager to shape their academic journey at the university level. Our platform empowers students to strategically plan their future courses, making it seamless to chart a path toward their desired degree.
+
+This project aims to provide a full-stack solution for creating and managing a course planner. The frontend is built with React and Vite, styled using Tailwind CSS. The backend, powered by Express, loads data into a cloud server and exposes an API endpoint for class information. The data is gathered with python via web scraping.
 
 ## Technologies Used
-
+- Python
 - React
 - Vite
 - Tailwind CSS
@@ -35,7 +37,7 @@ This project aims to provide a full-stack solution for creating and managing a c
 
 **University Course Planner:**
 
-We wanted to design a course planner for students eager to shape their academic journey at the university level. Our platform empowers students to strategically plan their future courses, making it seamless to chart a path toward their desired degree.
+
 
 ## Key Features:
 Intelligent Planning: we offer an intelligent planning system that enables students to visualize and organize their academic path effortlessly.
