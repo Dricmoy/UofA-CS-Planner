@@ -30,22 +30,22 @@ This project aims to provide a full-stack solution for creating and managing a c
 - Express
 - [Cloud Server Provider] (Specify the cloud server provider you are using)
 
-This is our initial plan:
+**This is our initial plan:**
 ![image](https://github.com/peterhuang569/UofAPlanner/assets/132851695/a3619d1e-e266-4d85-a2ec-6997c1788f5a)
 
-**University Course Planner**
+**University Course Planner:**
 
 We wanted to design a course planner for students eager to shape their academic journey at the university level. Our platform empowers students to strategically plan their future courses, making it seamless to chart a path toward their desired degree.
 
-Key Features
-
+## Key Features:
 Intelligent Planning: we offer an intelligent planning system that enables students to visualize and organize their academic path effortlessly.
 
-Course Specifics: Easily locate and plan for specialized courses like "Computer Science XXX" with detailed information on their description, prerequisites, and corequisites.
+**Course Specifics:** 
+Easily locate and plan for specialized courses like "Computer Science XXX" with detailed information on their description, prerequisites, and corequisites.
 
-Automatic Prerequisite Detection: Our planner automatically identifies and highlights any prerequisites or corequisites needed for the selected courses, ensuring a comprehensive and error-free planning experience.
+**Automatic Prerequisite Detection:** 
+Our planner automatically identifies and highlights any prerequisites or corequisites needed for the selected courses, ensuring a comprehensive and error-free planning experience.
 
 
-
-Data is hosted on PlanetScale using their free tier:
+**Data is hosted on PlanetScale using their free tier:**
 ![image](https://github.com/peterhuang569/UofAPlanner/assets/132851695/0f3f128c-656b-4215-a68d-f815a6f19742)
