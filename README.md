@@ -1,5 +1,8 @@
 # Fullstack Course Planner
 
+![image](https://github.com/peterhuang569/UofAPlanner/assets/132851695/55751400-4720-4da3-b708-d1636668cf7d)
+![image](https://github.com/peterhuang569/UofAPlanner/assets/132851695/4fbf7641-3187-48c4-b049-065d0bf0fde1)
+
 ## Table of Contents
 - [Introduction](#introduction)
 - [Technologies Used](#technologies-used)
@@ -41,12 +44,6 @@ Intelligent Planning: we offer an intelligent planning system that enables stude
 Course Specifics: Easily locate and plan for specialized courses like "Computer Science XXX" with detailed information on their description, prerequisites, and corequisites.
 
 Automatic Prerequisite Detection: Our planner automatically identifies and highlights any prerequisites or corequisites needed for the selected courses, ensuring a comprehensive and error-free planning experience.
-
-
-
-Front Page: 
-![image](https://github.com/peterhuang569/UofAPlanner/assets/132851695/55751400-4720-4da3-b708-d1636668cf7d)
-![image](https://github.com/peterhuang569/UofAPlanner/assets/132851695/4fbf7641-3187-48c4-b049-065d0bf0fde1)
 
 
 
