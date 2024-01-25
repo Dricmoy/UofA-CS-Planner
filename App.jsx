@@ -1,17 +1,19 @@
-import React from 'react'
-import Navbar from './components/navbar';
-import Hero from './components/Hero';
-import About from './components/About';
+import { useState } from 'react';
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
 
 function App() {
-  return(
-    <dev>
-      <Navbar />
-      <Hero/>
-      <About/>
-    </dev>
+  return (
+    <div>
+      <img 
+        src="https://www.ualberta.ca/uofa-tomorrow/media-library/updates/health-sciences-ua.png" 
+        alt="UAlberta Logo"
+        style={{ height: '400px', width: '600px' }} 
+      />
+      <Header />
+      <Footer />
+    </div>
   );
-  
 }
 
-export default App
+export default App;
