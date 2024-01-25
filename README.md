@@ -50,5 +50,12 @@ Front Page:
 
 
 
+Data is hosted on PlanetScale using their free tier:
+![image](https://github.com/peterhuang569/UofAPlanner/assets/132851695/0f3f128c-656b-4215-a68d-f815a6f19742)
+
+
+
+
+
 
 
